@@ -23,18 +23,25 @@ const SignInForm: React.FC<SignInFormProps> = ({ }) => {
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
-        // const response = await fetch('/api/auth/signin', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(formData),
-        // })
-        // const data = await response.json()
+        const response = await fetch('/api/auth/signin', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        })
+        const data = await response.json()
+        console.log(data)
+        if (data != '-1') {
+            alert("Login Successfully!")
+        }
+        else {
+            alert("password incorrect")
+        }
 
-        alert("Login Successfully!")
+
     }
-    
+
     return (
         <form onSubmit={handleSubmit}>
             <div>
@@ -50,7 +57,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ }) => {
             <div>
                 <label htmlFor="password">Password</label>
                 <input
-                    type="password" 
+                    type="password"
                     id="password"
                     name="password"
                     value={formData.password}
